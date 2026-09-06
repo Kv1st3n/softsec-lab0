@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from calculator import *
+from .calculator import *
 import re
 
 app = Flask(__name__)
@@ -17,7 +17,7 @@ def secret():
 @app.route("/calc", methods=["POST"])
 def calculate():
     calc = Calculator()
-    allowed_patterns = r"^[0-9+*/-]{1,10}$"
+    allowed_patterns = r"^[0-9+*/-]{2,10}$"
     
     data = request.get_json(silent=True)
     if not data or "expression" not in data:
