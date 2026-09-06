@@ -1,0 +1,10 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    stop_signal: SIGINT
+    ports:
+      - "${APP_PORT}:8080"
