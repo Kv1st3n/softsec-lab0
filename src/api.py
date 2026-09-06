@@ -19,11 +19,12 @@ def calculate():
     calc = Calculator()
     allowed_patterns = r"^[0-9+*/-]{2,10}$"
     
-    user_input = request.get_json()
-    if not user_input or "expression" not in user_input:
-        return jsonify({"error": "Missing expression in request body"}), 400
+    expression = request.get_data(as_text=True)
+    
+    if not expression:
+        return "Error, missing input", 400
         
-    expression = user_input["expression"]
+    expression = expression["expression"]
     
     if re.match(allowed_patterns, expression):
         result = calc.calc(expression)
