@@ -17,14 +17,13 @@ def secret():
 @app.route("/calc", methods=["POST"])
 def calculate():
     calc = Calculator()
-    allowed_patterns = r"^[0-9+*/-]{2,10}$"
+    allowed_patterns = r"^[0-9+*/-]{1,10}$"
     
-    expression = request.get_data(as_text=True)
-    
-    if not expression:
-        return "Error, missing input", 400
+    data = request.get_json(silent=True)
+    if not data or "expression" not in data:
+        return jsonify({"error": "Error, missing input"}), 400
         
-    expression = expression["expression"]
+    expression = data["expression"]
     
     if re.match(allowed_patterns, expression):
         result = calc.calc(expression)
