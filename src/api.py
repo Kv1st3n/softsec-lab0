@@ -8,5 +8,10 @@ def hello():
     messeage = "Hello"
     return jsonify(messeage)
 
+@app.route("/secret", methods=["GET"])
+def secret():
+    secret = "123"
+    return jsonify(secret)
+
 if __name__ == "__main__":
     app.run()
