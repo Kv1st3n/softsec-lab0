@@ -14,7 +14,7 @@ def secret():
     secret = "123"
     return jsonify(secret)
 
-@app.route("/calc", methods=["POST"])
+@app.route("/calc", methods=["POST", "GET"])
 def calculate():
     calc = Calculator()
     allowed_patterns = r"^[0-9+*/-]{2,10}$"
